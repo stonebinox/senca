@@ -3,10 +3,6 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.editor=null;
     $scope.loadEditor=function(){
         var options={
-            debug: 'info',
-            modules:{
-                toolbar: '#toolbar'
-            },
             placeholder: 'Start writing ...',
             theme: 'snow'
         };
