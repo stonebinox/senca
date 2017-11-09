@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 <body ng-app="senca">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6 details">
-                <h1 class="text-center">Senca</h1>
+    <div ng-controller="editor">
+        <div id="left">
+            <div class="container-fluid">
+                <h1 class="text-center" style="color:#ffffff;">Senca</h1>
             </div>
-            <div class="col-sm-6">
+        </div>
+        <div id="right" ng-init="loadEditor()">
+            <div class="container" id="editor">
+
             </div>
         </div>
     </div>
