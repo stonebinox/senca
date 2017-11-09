@@ -2,7 +2,7 @@ var app=angular.module("senca",[]);
 app.controller("editor",function($scope,$compile,$http){
     $scope.editor=null;
     $scope.loadEditor=function(){
-        var option={
+        var options={
             debug: 'info',
             modules:{
                 toolbar: '#toolbar'
