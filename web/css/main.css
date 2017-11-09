@@ -11,6 +11,9 @@ h1{
     font-weight:bold;
     font-size:45px;
 }
+.details{
+    background:url(../images/concrete_wall.png);
+}
 #footer{
     position:fixed;
     bottom:0;
