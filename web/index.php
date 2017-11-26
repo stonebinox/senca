@@ -66,8 +66,20 @@ $app->get("/url/getURLCount",function() use($app){
 $app->get("/test",function() use($app){
     $url='https://profiles.stanford.edu/proxy/api/cap/search/keyword?p=1&q=aaa&ps=10';
     $json=file_get_contents($url);
-    $json=json_encode($json);
-    return var_dump($json);
+    $e=explode("@",$json);
+    $text='';
+    for($i=0;$i<count($e);$i+=2)
+    {
+        $part=$e[$i];
+        $e2=explode('"',$part);
+        $first=trim($e2[0]);
+        $second=$e2[$i+1];
+        $e2=explode('"',$second);
+        $second=trim($e2[0]);
+        $email=$first.'@'.$second;
+        $text.=$email.'<br>';
+    }
+    return $text;
 });
 $app->run();
 ?>
