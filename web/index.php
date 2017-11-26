@@ -71,8 +71,9 @@ $app->get("/test",function() use($app){
     for($i=0;$i<count($e);$i+=2)
     {
         $part=$e[$i];
-        $e2=explode('"',$part);
-        $first=trim($e2[1]);
+        $rev=strrev($part);
+        $e2=explode('"',$rev);
+        $first=strrev(trim($e2[0]));
         $second=$e[$i+1];
         $e2=explode('"',$second);
         $second=trim($e2[0]);
