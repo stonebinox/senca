@@ -78,7 +78,10 @@ $app->get("/test",function() use($app){
         $e2=explode('"',$second);
         $second=trim($e2[0]);
         $email=$first.'@'.$second;
-        $text.=$email.'<br>';
+        if(strpos($email,' ')==false)
+        {
+            $text.=$email.'<br>';
+        }
     }
     return $text;
 });
