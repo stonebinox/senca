@@ -63,5 +63,10 @@ $app->get("/url/getURLCount",function() use($app){
     $response=$url->countURLs();
     return $response;
 });
+$app->get("/test",function() use($app){
+    $url='https://profiles.stanford.edu/proxy/api/cap/search/keyword?p=1&q=aaa&ps=10';
+    $json=file_get_contents($url);
+    return $json;
+});
 $app->run();
 ?>
