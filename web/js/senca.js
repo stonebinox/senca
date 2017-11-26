@@ -22,7 +22,38 @@ appURL.controller("url",function($scope,$compile,$http){
         var url=$.trim($("#url").val());
         if(validate(url)){
             $("#url").parent().removeClass("has-error");
-
+            $("#url").val('');
+            $.ajax({
+                url: "url/addURL",
+                method: "POST",
+                data: {
+                    url: url
+                },
+                error: function(err){
+                    console.log(err);
+                    messageBox("Problem","Something went wrong while adding this URL. Please try again later.");
+                },
+                success: function(response){
+                    $("#addbut").removeClass("disabled");
+                    if((validate(response))&&(response!="INVALID_PARAMETERS")){
+                        if(response=="URL_ALREADY_EXISTS"){
+                            messageBox("Already Added","This URL has already been added.");
+                        }
+                        else if(response.indexOf("URL_ADDED_")!=-1){
+                            $scope.getAddedURLs();
+                        }
+                        else{
+                            messageBox("Problem","Something went wrong while adding this product. Please try again later. This is the error we see: "+response);
+                        }
+                    }
+                    else{
+                        messageBox("Problem","Something went wrong while adding this product. Please try again later.");
+                    }
+                },
+                beforeSend: function(){
+                    $("#addbut").addClass("disabled");
+                }
+            });
         }
         else{
             $("#url").parent().addClass("has-error");
@@ -37,7 +68,6 @@ appURL.controller("url",function($scope,$compile,$http){
             }
             else{
                 response=$.trim(response);
-                console.log(response);
                 switch(response){
                     case "INVALID_PARAMETERS":
                     default:
