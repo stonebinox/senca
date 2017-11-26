@@ -72,7 +72,7 @@ $app->get("/test",function() use($app){
     {
         $part=$e[$i];
         $e2=explode('"',$part);
-        $first=trim($e2[0]);
+        $first=trim($e2[1]);
         $second=$e2[$i+1];
         $e2=explode('"',$second);
         $second=trim($e2[0]);
