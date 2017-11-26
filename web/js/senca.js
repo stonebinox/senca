@@ -9,3 +9,17 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.init('*[data-editable]','data-name');
     };
 });
+var appURL=angular.module("sencaurl",[]);
+appURL.controller("url",function($scope,$compile,$http){
+    $scope.url=null;
+    $scope.addURL=function(){
+        var url=$.trim($("#url").val());
+        if(validate(url)){
+            $("#url").parent().removeClass("has-error");
+            
+        }
+        else{
+            $("#url").parent().addClass("has-error");
+        }
+    };
+});

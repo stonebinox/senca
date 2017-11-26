@@ -31,5 +31,8 @@ $app->before(function(Request $request) use($app){
 $app->get("/",function() use($app){
     $app['twig']->render("index.html.twig");
 });
+$app->get("/add",function() use($app){
+    $app['twig']->render("add.html.twig");
+});
 $app->run();
 ?>
