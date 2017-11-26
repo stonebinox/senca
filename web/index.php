@@ -57,5 +57,11 @@ $app->get("/url/getAddedURLs",function() use($app){
     }
     return $urls;
 });
+$app->get("/url/getURLCount",function() use($app){
+    require("../classes/urlMaster.php");
+    $url=new urlMaster;
+    $response=$url->countURLs();
+    return $response;
+});
 $app->run();
 ?>

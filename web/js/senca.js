@@ -18,6 +18,7 @@ appURL.config(function($interpolateProvider){
 });
 appURL.controller("url",function($scope,$compile,$http){
     $scope.url=null;
+    $scope.urlArray=[];
     $scope.addURL=function(){
         var url=$.trim($("#url").val());
         if(validate(url)){
@@ -64,7 +65,8 @@ appURL.controller("url",function($scope,$compile,$http){
         .then(function success(response){
             response=response.data;
             if(typeof response=="object"){
-                console.log(response);
+                $scope.urlArray=response;
+                $scope.displayURLs();
             }
             else{
                 response=$.trim(response);
@@ -83,5 +85,26 @@ appURL.controller("url",function($scope,$compile,$http){
             console.log(response);
             messageBox("Problem","Something went wrong while fetching past URLs. Please try again later.");
         });
+    };
+    $scope.displayURLs=function(){
+        if(validate($scope.urlArray)){
+            var urls=$scope.urlArray;
+            var table='<table class="table"><thead><tr><th>URL</th><th>Status</th><th>Actions</th></thead><tbody>';
+            for(var i=0;i<urls.length;i++){
+                var url=urls[i];
+                var urlID=url.idurl_master;
+                var link=url.url;
+                var status=parseInt(url.stat);
+                if(status==1){
+                    status='<span class="text-success">Extracted</span>';
+                }
+                else{
+                    status='<span class="text-warning">Pending</span>';
+                }
+                table+='<tr><td>'+link+'</td><td>'+status+'</td><td><div class="btn-group"><button type="button" class="btn btn-primary btn-xs">Extract</button><button type="button" class="btn btn-danger btn-xs">Delete</button></div></td></tr>';
+            }
+            table+='</tbody></table>';
+            $("#urllist").html(table);
+        }
     };
 });
