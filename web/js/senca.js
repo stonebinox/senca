@@ -96,12 +96,19 @@ appURL.controller("url",function($scope,$compile,$http){
                 var link=url.url;
                 var status=parseInt(url.stat);
                 if(status==1){
-                    status='<span class="text-success">Extracted</span>';
+                    var statusText='<span class="text-success">Extracted</span>';
                 }
                 else{
-                    status='<span class="text-warning">Pending</span>';
+                    var statusText='<span class="text-warning">Pending</span>';
                 }
-                table+='<tr><td><a href="'+link+'" target="_blank">'+link+'</a></td><td>'+status+'</td><td><div class="btn-group"><button type="button" class="btn btn-primary btn-xs">Extract</button><button type="button" class="btn btn-danger btn-xs">Delete</button></div></td></tr>';
+                table+='<tr><td><a href="'+link+'" target="_blank">'+link+'</a></td><td>'+statusText+'</td><td><div class="btn-group">';
+                if(status==2){
+                    table+='<button type="button" class="btn btn-primary btn-xs">Extract</button>';
+                }
+                else{
+                    table+='<button type="button" class="btn btn-success btn-xs">Extracted</button>';
+                }
+                table+='<button type="button" class="btn btn-danger btn-xs">Delete</button></div></td></tr>';
             }
             table+='</tbody></table>';
             $("#urllist").html(table);
