@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <body ng-app="sencaurl">
-    <div class="container" ng-controller="url">
+    <div class="container" ng-controller="url" ng-init="urlCount=0">
         <h1 class="text-center">Add URL</h1>
         <hr>
         <form>
@@ -13,6 +13,11 @@
                 <button type="button" class="btn btn-primary">Add URL</button>
             </div>
         </form>
+        <hr>
+        <h3 class="text-center">Added URLs ({[{urlCount}]})</h3>
+        <div class="well" ng-init="getAddedURLs()">
+            <div id="urllist"></div>
+        </div>
     </div>
     <br>
     <br>

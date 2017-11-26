@@ -34,5 +34,28 @@ $app->get("/",function() use($app){
 $app->get("/add",function() use($app){
     return $app['twig']->render("add.html.twig");
 });
+$app->post("/url/addURL",function(Request $request) use($app){
+    if($request->get("url"))
+    {
+        require("../classes/urlMaster.php");
+        $url=new urlMaster;
+        $response=$url->addURL($request->get("url"));
+        return $response;
+    }
+    else
+    {
+        return "INVALID_PARAMETERS";
+    }
+});
+$app->get("/url/getAddedURLs",function() use($app){
+    require("../classes/urlMaster.php");
+    $url=new urlMaster;
+    $urls=$url->getURLs();
+    if(is_array($urls))
+    {
+        return json_encode($urls);
+    }
+    return $urls;
+});
 $app->run();
 ?>

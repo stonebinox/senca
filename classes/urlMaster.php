@@ -90,7 +90,7 @@ class urlMaster
     {
         $app=$this->app;
         $url=trim(strtolower(addslashes(htmlentities($url))));
-        if(($url!="")&&($url!=NULL))
+        if(($url!="")&&($url!=NULL)&&(filter_var($url, FILTER_VALIDATE_URL)))
         {
             $urlID=$this->getURLIDByURL($url);
             if(is_numeric($urlID))
@@ -107,6 +107,40 @@ class urlMaster
         else
         {
             return "INVALID_URL";
+        }
+    }
+    function getURLs($offset=0) //to get list of urls
+    {
+        $offset=addslashes(htmlentities($offset));
+        if(($offset!="")&&($offset!=NULL)&&(is_numeric($offset))&&($offset>=0))
+        {
+            $app=$this->app;
+            $um="SELECT idurl_master FROM url_master WHERE stat!='0' ORDER BY idurl_master DESC LIMIT $offset,10";
+            $um=$app['db']->fetchAll($um);
+            $urlArray=array();
+            for($i=0;$i<count($um);$i++)
+            {
+                $row=$um[$i];
+                $urlID=$row['idurl_master'];
+                urlMaster::__construct($urlID);
+                $url=urlMaster::getURL();
+                if(is_array($url))
+                {
+                    array_push($urlArray,$url);
+                }
+            }
+            if(count($urlArray)>0)
+            {
+                return $urlArray;
+            }
+            else
+            {
+                return "NO_URLS_FOUND";
+            }
+        }
+        else
+        {
+            return "INVALID_OFFSET_VALUE";
         }
     }
 }
