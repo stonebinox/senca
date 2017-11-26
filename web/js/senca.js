@@ -33,10 +33,20 @@ appURL.controller("url",function($scope,$compile,$http){
         .then(function success(response){
             response=response.data;
             if(typeof response=="object"){
-
+                console.log(response);
             }
             else{
                 response=$.trim(response);
+                console.log(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while loading past added URLs. This is the error we see: "+response);
+                    break;
+                    case "NO_URLS_FOUND":
+                    $("#urllist").append('<p>No URLs found. Add one now!</p>');
+                    break;
+                }
             }
         },
         function error(response){
