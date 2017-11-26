@@ -101,7 +101,7 @@ appURL.controller("url",function($scope,$compile,$http){
                 else{
                     status='<span class="text-warning">Pending</span>';
                 }
-                table+='<tr><td>'+link+'</td><td>'+status+'</td><td><div class="btn-group"><button type="button" class="btn btn-primary btn-xs">Extract</button><button type="button" class="btn btn-danger btn-xs">Delete</button></div></td></tr>';
+                table+='<tr><td><a href="'+link+'" target="_blank">'+link+'</a></td><td>'+status+'</td><td><div class="btn-group"><button type="button" class="btn btn-primary btn-xs">Extract</button><button type="button" class="btn btn-danger btn-xs">Delete</button></div></td></tr>';
             }
             table+='</tbody></table>';
             $("#urllist").html(table);
