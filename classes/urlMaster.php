@@ -64,5 +64,50 @@ class urlMaster
             return "INVALID_URL_ID";
         }
     }
+    function getURLIDByURL($url)
+    {
+        $app=$this->app;
+        $url=trim(strtolower(addslashes(htmlentities($url))));
+        if(($url="")&&($url!=NULL))
+        {
+            $um="SELECT idurl_master FROM url_master WHERE stat!='0' AND url='$url'";
+            $um=$app['db']->fetchAssoc($um);
+            if(($um!="")&&($um!=NULL))
+            {
+                return $um['idurl_master'];
+            }
+            else
+            {
+                return "NO_URL_FOUND";
+            }
+        }
+        else
+        {
+            return "INVALID_URL";
+        }
+    }
+    function addURL($url) //to add a URL
+    {
+        $app=$this->app;
+        $url=trim(strtolower(addslashes(htmlentities($url))));
+        if(($url!="")&&($url!=NULL))
+        {
+            $urlID=$this->getURLIDByURL($url);
+            if(is_numeric($urlID))
+            {
+                return "URL_ALREADY_EXISTS";
+            }
+            $in="INSERT INTO url_master (timestamp,stat,url) VALUES (NOW(),'2','$url')";
+            $in=$app['db']->executeQuery($in);
+            $um="SELECT idurl_master FROM url_master WHERE stat='2' AND url='$url' ORDER BY idurl_master DESC LIMIT 1";
+            $um=$app['db']->fetchAssoc($um);
+            $urlID=$um['idurl_master'];
+            return "URL_ADDED_".$urlID;
+        }
+        else
+        {
+            return "INVALID_URL";
+        }
+    }
 }
 ?>
