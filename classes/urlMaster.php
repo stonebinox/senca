@@ -161,7 +161,7 @@ class urlMaster
                 curl_close($ch);*/
                 $output=file_get_contents($url);
                 $json=json_encode($output);
-                var_dump(json_decode($json,true));
+                echo $json;
                 return "DONE";
             }
             else
