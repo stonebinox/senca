@@ -47,6 +47,15 @@ $app->post("/url/addURL",function(Request $request) use($app){
         return "INVALID_PARAMETERS";
     }
 });
+$app->get("/extract/{urlID}",function($urlID){
+    require("../classes/urlMaster.php");
+    require("../classes/userMapMaster.php");
+    require("../classes/contentTypeMaster.php");
+    require("../classes/contentMaster.php");
+    $url=new urlMaster($urlID);
+    $response=$url->processURL();
+    return $response;
+});
 $app->get("/url/getAddedURLs",function() use($app){
     require("../classes/urlMaster.php");
     $url=new urlMaster;
@@ -62,28 +71,6 @@ $app->get("/url/getURLCount",function() use($app){
     $url=new urlMaster;
     $response=$url->countURLs();
     return $response;
-});
-$app->get("/test",function() use($app){
-    $url='https://profiles.stanford.edu/proxy/api/cap/search/keyword?p=1&q=aaa&ps=10';
-    $json=file_get_contents($url);
-    $e=explode("@",$json);
-    $text='';
-    for($i=0;$i<count($e);$i+=2)
-    {
-        $part=$e[$i];
-        $rev=strrev($part);
-        $e2=explode('"',$rev);
-        $first=strrev(trim($e2[0]));
-        $second=$e[$i+1];
-        $e2=explode('"',$second);
-        $second=trim($e2[0]);
-        $email=$first.'@'.$second;
-        if(strpos($email,' ')==false)
-        {
-            $text.=$email.'<br>';
-        }
-    }
-    return $text;
 });
 $app->run();
 ?>

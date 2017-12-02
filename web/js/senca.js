@@ -114,4 +114,15 @@ appURL.controller("url",function($scope,$compile,$http){
             $("#urllist").html(table);
         }
     };
+    $scope.scrapeURL=function(urlID){
+        $http.get("url/scrapeData/"+urlID)
+        .then(function success(response){
+            response=$.trim(response.data);
+            console.log(response);
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while trying to process this URL. Please try again later.");
+        });
+    };
 });

@@ -143,5 +143,35 @@ class urlMaster
             return "INVALID_OFFSET_VALUE";
         }
     }
+    function processURL() //to process a url and extract all content
+    {
+        $app=$this->app;
+        if($this->urlValid)
+        {
+            $urlID=$this->url_id;
+            $um="SELECT url FROM url_master WHERE idurl_master='$urlID'";
+            $um=$app['db']->fetchAssoc($um);
+            if(($um!="")&&($um!=NULL))
+            {
+                $url=$um['url'];
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                $output = curl_exec($ch);
+                curl_close($ch);
+                $json=json_encode($output);
+                var_dump(json_decode($json,true));
+                return "DONE";
+            }
+            else
+            {
+                return "INVALID_URL_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_URL_ID";
+        }
+    }
 }
 ?>
