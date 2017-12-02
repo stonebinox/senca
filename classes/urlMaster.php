@@ -154,11 +154,12 @@ class urlMaster
             if(($um!="")&&($um!=NULL))
             {
                 $url=$um['url'];
-                $ch = curl_init();
+                /*$ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
                 $output = curl_exec($ch);
-                curl_close($ch);
+                curl_close($ch);*/
+                $output=file_get_contents($url);
                 $json=json_encode($output);
                 var_dump(json_decode($json,true));
                 return "DONE";
