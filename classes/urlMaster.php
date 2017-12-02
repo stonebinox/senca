@@ -160,8 +160,7 @@ class urlMaster
                 $output = curl_exec($ch);
                 curl_close($ch);*/
                 $output=file_get_contents($url);
-                $json=json_encode($output);
-                echo $json;
+                echo nl2br(htmlentities($output));
                 return "DONE";
             }
             else
