@@ -48,10 +48,10 @@ $app->post("/url/addURL",function(Request $request) use($app){
     }
 });
 $app->get("/extract/{urlID}",function($urlID){
-    require("../../classes/urlMaster.php");
-    require("../../classes/userMapMaster.php");
-    require("../../classes/contentTypeMaster.php");
-    require("../../classes/contentMaster.php");
+    require("../classes/urlMaster.php");
+    require("../classes/urlMapMaster.php");
+    require("../classes/contentTypeMaster.php");
+    require("../classes/contentMaster.php");
     $url=new urlMaster($urlID);
     $response=$url->processURL();
     return $response;
