@@ -170,6 +170,7 @@ class urlMaster
             {
                 $url=$um['url'];
                 $output=file_get_contents($url);
+                echo htmlentities($output);
                 $dom = new DOMDocument();
                 $dom->loadHTML($output);
                 $json=$this->element_to_obj($dom->documentElement);
