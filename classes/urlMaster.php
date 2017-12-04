@@ -177,8 +177,8 @@ class urlMaster
                 $json=$this->element_to_obj($dom->documentElement);
                 $json=json_encode($json);
                 $json=json_decode($json,true);
-                $head=$json['children'][0];
-                var_dump($json);
+                $body=$json['children'][1];
+                var_dump($body);
                 return "DONE";
             }
             else
