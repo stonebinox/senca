@@ -169,17 +169,17 @@ class urlMaster
             if(($um!="")&&($um!=NULL))
             {
                 $url=$um['url'];
-                $output=file_get_contents($url);
-                $dom = new DOMDocument();
-                libxml_use_internal_errors(true);
-                @$dom->loadHTML($output);
-                libxml_clear_errors();
-                $json=$this->element_to_obj($dom->documentElement);
-                $json=json_encode($json);
-                $json=json_decode($json,true);
-                $body=$json['children'][1]['children'];
-                var_dump($body);
-                return "DONE";
+                $output=@file_get_contents($url);
+                if(($output!="")&&($output!=NULL))
+                {
+                    $content=new contentMaster;
+                    $response=$content->addContent($output,31,$urlID);
+                    return $response;
+                }
+                else
+                {
+                    return "NO_CONTENT_FOUND";
+                }
             }
             else
             {

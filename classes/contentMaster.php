@@ -96,5 +96,47 @@ class contentMaster extends contentTypeMaster
             return "INVALID_CONTENT_ID";
         }
     }
+    function addContent($content,$contentypeID,$urlID) //to add content
+    {
+        $app=$this->app;
+        $content=trim(addslashes($content));
+        if(($content!="")&&($content!=NULL))
+        {
+            $contentTypeID=addslashes(htmlentities($contentTypeID));
+            contentTypeMaster::__construct($contentTypeID);
+            if($this->contentTypeValid)
+            {
+                $urlID=addslashes(htmlentities($urlID));
+                urlMaster::__construct($urlID);
+                if($this->urlValid)
+                {
+                    $cm="SELECT idcontent_master FROM content_master WHERE stat='1' AND url_master_idurl_master='$urlID' AND content_type_master_idcontent_type_master='$contentTypeID' AND content_value='$content'";
+                    $cm=$app['db']->fetchAssoc($cm);
+                    if(($cm=="")||($cm==NULL))
+                    {
+                        $in="INSERT INTO content_master (timestamp,url_master_idurl_master,content_type_master_idcontent_type_master,content_value) VALUES (NOW(),'$urlID','$contentTypeID','$content')";
+                        $in=$app['db']->executeQuery($in);
+                        return "CONTENT_ADDED";
+                    }
+                    else
+                    {
+                        return "CONTENT_ALREADY_ADDED";
+                    }
+                }
+                else
+                {
+                    return "INVALID_URL_ID";
+                }
+            }
+            else
+            {
+                return "INVALID_CONTENT_TYPE_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_CONTENT";
+        }
+    }
 }
 ?>
