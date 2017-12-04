@@ -176,7 +176,8 @@ class urlMaster
                 libxml_clear_errors();
                 $json=$this->element_to_obj($dom->documentElement);
                 $json=json_encode($json);
-                var_dump(json_decode($json,true));
+                $json=json_decode($json,true);
+                var_dump($json['tag']);
                 return "DONE";
             }
             else
