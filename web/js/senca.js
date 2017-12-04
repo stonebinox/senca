@@ -4,18 +4,26 @@ app.config(function($interpolateProvider){
 });
 app.controller("editor",function($scope,$compile,$http){
     $scope.editor=null;
+    $scope.this=null;
     $scope.loadEditor=function(){
         ContentTools.StylePalette.add([
             new ContentTools.Style("Author","author",["p"])
         ]);
         $scope.editor=ContentTools.EditorApp.get();
         $scope.editor.init('*[data-editable]','data-name');
-        $scope.editor.addEventListener('saved', $scope.searchContent);
+        $scope.editor.addEventListener('start', function (ev) {
+            $scope.this=this;
+            $scope.this.autoSaveTimer = setInterval($scope.searchContent, 30 * 1000);
+        });
+        $scope.editor.addEventListener('stop', function (ev) {
+            clearInterval($scope.this.autoSaveTimer);
+        });
     };
     $scope.searchContent=function(ev){
         if(validate($scope.editor)){
             var regions = ev.detail().regions;
-            console.log(regions);
+            var content=regions.mainContent;
+            console.log(content);
         }
     };
 });
