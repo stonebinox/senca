@@ -25,8 +25,7 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.searchContent=function(ev){
         if(validate($scope.editor)){
             var regions = ev.detail().regions;
-            var content=regions.mainContent;
-            console.log(content);
+            console.log(regions);
         }
     };
 });
