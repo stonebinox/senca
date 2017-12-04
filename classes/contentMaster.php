@@ -96,7 +96,7 @@ class contentMaster extends contentTypeMaster
             return "INVALID_CONTENT_ID";
         }
     }
-    function addContent($content,$contentypeID,$urlID) //to add content
+    function addContent($content,$contentTypeID,$urlID) //to add content
     {
         $app=$this->app;
         $content=trim(addslashes($content));
