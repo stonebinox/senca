@@ -138,5 +138,50 @@ class contentMaster extends contentTypeMaster
             return "INVALID_CONTENT";
         }
     }
+    function searchContent($content) //to search for matching content
+    {
+        $app=$this->app;
+        $content=trim(addslashes($content));
+        if(($content!="")&&($content!=NULL))
+        {
+            $e=explode(" ",$content);
+            $cm="SELECT idcontent_master FROM content_master WHERE stat='1' AND ";
+            for($i=0;$i<count($e);$i++)
+            {
+                $word=$e[$i];
+                $cm.="content_value LIKE '%$word%'";
+                if(($i!=0)&&($i<count($e)-1))
+                {
+                    $cm.=" AND ";
+                }
+            }
+            $cm.=" ORDER BY idcontent_master DESC LIMIT 10";
+            $cm=$app['db']->fetchAll($cm);
+            $contentArray=array();
+            for($i=0;$i<count($cm);$i++)
+            {
+                $contentRow=$cm[$i];
+                $contentID=$contentRow['idcontent_master'];
+                $this->__construct($contentID);
+                $contentData=$this->getContent();
+                if(is_array($contentData))
+                {
+                    array_push($contentArray,$contentData);
+                }
+            }
+            if(count($contentArray)>0)
+            {
+                return $contentArray;
+            }
+            else
+            {
+                return "NO_CONTENT_FOUND";
+            }
+        }
+        else
+        {
+            return "INVALID_CATEGORY";
+        }
+    }
 }
 ?>

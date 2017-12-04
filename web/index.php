@@ -78,5 +78,25 @@ $app->get("/url/delete/{urlID}",function($urlID) use ($app){
     $response=$url->deleteURL();
     return $response;
 });
+$app->post("/search",function(Request $request) use($app){
+    if($request->get("content"))
+    {
+        require("../classes/urlMaster.php");
+        require("../classes/urlMapMaster.php");
+        require("../classes/contentTypeMaster.php");
+        require("../classes/contentMaster.php");
+        $content=new contentMaster;
+        $response=$content->searchContent($request->get("content"));
+        if(is_array($response))
+        {
+            return json_encode($response);
+        }
+        return $response;
+    }
+    else
+    {
+        return "INVALID_PARAMETERS";
+    }
+});
 $app->run();
 ?>

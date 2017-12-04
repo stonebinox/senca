@@ -22,12 +22,54 @@ app.controller("editor",function($scope,$compile,$http){
     };
     $scope.searchContent=function(){
         if(validate($scope.editor)){
-            console.log($scope.content);
-            var content=$('[data-name="main-content"]').html();
-            console.log(content);
-            $scope.timeout=setTimeout(function(){
-                $scope.searchContent();
-            },5000);
+            var content=$.trim($('[data-name="main-content"]').html());
+            if(validate(content)){
+                var sp=content.split(" ");
+                if(sp.length>=50){
+                    clearTimeout($scope.timeout);
+                    $scope.timeout=null;
+                    $.ajax({
+                        method:"post",
+                        action:"search",
+                        data: {
+                            content: content
+                        },
+                        error: function(error){
+                            console.log(error);
+                            messageBox("Problem","Something wentg wrong while searching for suggestions. Please try again later.");
+                        },
+                        success: function(response){
+                            $("#suggestions").html("");
+                            if((validate(response))&&(response!="INVALID_PARAMETERS")){
+                                if(response=="NO_CONTENT_FOUND"){
+                                    $("#suggestions").html("<small>No matches found.</small>");
+                                }
+                                else if(response=="INVALID_CONTENT"){
+                                    $("#suggestions").html("<small>Please enter some text to have suggestions show up.</small>");
+                                }
+                                else{
+                                    response=JSON.parse(response);
+                                    console.log(response);
+                                    $scope.timeout=setTimeout(function(){
+                                        $scope.searchContent();
+                                    },5000);
+                                }
+                            }  
+                            else{
+                                messageBox("Problem","Something went wrong while searching for suggestions. Please try again later. This is what we see: "+response);
+                            }
+                        },
+                        beforeSend:function(){
+                            $("#suggestions").html("Searching ...");
+                        }
+                    });
+                }
+                else{
+                    $scope.timeout=setTimeout(function(){
+                        $scope.searchContent();
+                    },5000);
+                }
+            }
         }
     };
 });
