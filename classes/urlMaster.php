@@ -174,6 +174,11 @@ class urlMaster
                 {
                     $content=new contentMaster;
                     $response=$content->addContent($output,31,$urlID);
+                    if($response=="CONTENT_ADDED")
+                    {
+                        $up="UPDATE url_master SET stat='1' WHERE idurl_master='$urlID'";
+                        $up=$app['db']->executeUpdate($up);
+                    }
                     return $response;
                 }
                 else
