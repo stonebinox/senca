@@ -103,26 +103,72 @@ appURL.controller("url",function($scope,$compile,$http){
                 }
                 table+='<tr><td><a href="'+link+'" target="_blank">'+link+'</a></td><td>'+statusText+'</td><td><div class="btn-group">';
                 if(status==2){
-                    table+='<button type="button" class="btn btn-primary btn-xs">Extract</button>';
+                    table+='<button type="button" class="btn btn-primary btn-xs" ng-click="scrapeURL('+urlID+')">Extract</button>';
                 }
                 else{
                     table+='<button type="button" class="btn btn-success btn-xs">Extracted</button>';
                 }
-                table+='<button type="button" class="btn btn-danger btn-xs">Delete</button></div></td></tr>';
+                table+='<button type="button" class="btn btn-danger btn-xs" ng-click="deleteURL('+urlID+')">Delete</button></div></td></tr>';
             }
             table+='</tbody></table>';
             $("#urllist").html(table);
+            $compile("#urllist")($scope);
         }
     };
     $scope.scrapeURL=function(urlID){
-        $http.get("url/scrapeData/"+urlID)
+        $http.get("url/extract/"+urlID)
         .then(function success(response){
             response=$.trim(response.data);
-            console.log(response);
+            switch(response){
+                case "INVALID_PARAMETERS":
+                default:
+                messageBox("Problem","Something went wrong while processing this URL. Please try again later. This is the error we see: "+response);
+                break;
+                case "INVALID_URL_ID":
+                messageBox("Invalid URL","The URL you're trying to process is inavlid.");
+                break;
+                case "NO_CONTENT_FOUND":
+                case "INVALID_CONTENT":
+                messageBox("No Content","There was no content found in the URL.");
+                break;
+                case "INVALID_CONTENT_TYPE_ID":
+                messageBox("Invalid Content Type","Something went wrong with the content type processed. Please try again later.");
+                break;
+                case "CONTENT_ALREADY_ADDED":
+                messageBox("Content Already Added","This URL has already been processed.");
+                break;
+                case "CONTENT_ADDED":
+                messageBox("URL Processed","The URL was process successfully!");
+                $scope.getAddedURLs();
+                break;
+            }
         },
         function error(response){
             console.log(response);
             messageBox("Problem","Something went wrong while trying to process this URL. Please try again later.");
+        });
+    };
+    $scope.deleteURL=function(urlID){
+        $http.get("url/delete/"+urlID)
+        .then(function success(response){
+            response=$.trim(response.data);
+            switch(response){
+                case "INVALID_PARAMETERS":
+                default:
+                messageBox("Problem","Something went weong while deleting this URL. This is the error we see: "+response);
+                break;
+                case "URL_DELETED":
+                messageBox("URL Deleted","The URL was deleted successfully.");
+                $scope.getAddedURLs();
+                break;
+                case "INVALID_URL_ID":
+                messageBox("Invalid URL","The URl you are trying to delete is invalid.");
+                break;
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while deleting this URL.");
         });
     };
 });

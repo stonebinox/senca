@@ -196,5 +196,20 @@ class urlMaster
             return "INVALID_URL_ID";
         }
     }
+    function deleteURL()
+    {
+        $app=$this->app;
+        if($this->urlValid)
+        {
+            $urlID=$this->url_id;
+            $um="UPDATE url_master SET stat='0' WHERE idurl_master='$urlID'";
+            $um=$app['db']->executeUpdate($um);
+            return "URL_DELETED";
+        }
+        else
+        {
+            return "INVALID_URL_ID";
+        }
+    }
 }
 ?>

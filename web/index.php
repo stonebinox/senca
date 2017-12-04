@@ -72,5 +72,11 @@ $app->get("/url/getURLCount",function() use($app){
     $response=$url->countURLs();
     return $response;
 });
+$app->get("/url/delete/{urlID}",function($urlID) use ($app){
+    require("../classes/urlMaster.php");
+    $url=new urlMaster($urlID);
+    $response=$url->deleteURL();
+    return $response;
+});
 $app->run();
 ?>
