@@ -10,6 +10,13 @@ app.controller("editor",function($scope,$compile,$http){
         ]);
         $scope.editor=ContentTools.EditorApp.get();
         $scope.editor.init('*[data-editable]','data-name');
+        $scope.editor.addEventListener('saved', $scope.searchContent);
+    };
+    $scope.searchContent=function(ev){
+        if(validate($scope.editor)){
+            var regions = ev.detail().regions;
+            console.log(regions);
+        }
     };
 });
 var appURL=angular.module("sencaurl",[]);
