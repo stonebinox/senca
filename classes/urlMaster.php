@@ -153,7 +153,7 @@ class urlMaster
                 $obj["html"] = $subElement->wholeText;
             }
             else {
-                $obj["children"][] = $this->element_to_obj($subElement);
+                $obj["children"][] = @$this->element_to_obj($subElement);
             }
         }
         return $obj;
