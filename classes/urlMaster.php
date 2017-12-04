@@ -175,7 +175,7 @@ class urlMaster
                 $dom->loadHTML($output);
                 libxml_clear_errors();
                 $json=$this->element_to_obj($dom->documentElement);
-                echo json_encode($json,JSON_PRETTY_PRINT);
+                var_dump(json_encode($json,JSON_PRETTY_PRINT));
                 return "DONE";
             }
             else
