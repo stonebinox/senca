@@ -179,7 +179,7 @@ class urlMaster
                 $json=json_decode($json,true);
                 $head=$json['children'][0];
                 $title=$head['children'][1];
-                var_dump($title);
+                var_dump($head);
                 return "DONE";
             }
             else
