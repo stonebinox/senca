@@ -172,7 +172,7 @@ class urlMaster
                 $output=file_get_contents($url);
                 $dom = new DOMDocument();
                 libxml_use_internal_errors(true);
-                $dom->loadHTML($output);
+                @$dom->loadHTML($output);
                 libxml_clear_errors();
                 $json=$this->element_to_obj($dom->documentElement);
                 var_dump(json_encode($json,JSON_PRETTY_PRINT));
