@@ -11,6 +11,7 @@ app.controller("editor",function($scope,$compile,$http){
         ]);
         $scope.editor=ContentTools.EditorApp.get();
         $scope.editor.init('*[data-editable]','data-name');
+        $scope.editor.addEventListener('saved',$scope.searchContent);
         $scope.editor.addEventListener('start', function (ev) {
             function autoSave(ev){
                 $scope.editor.save();
@@ -20,7 +21,6 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.addEventListener('stop', function (ev) {
             clearInterval($scope.autoSaveTimer);
         });
-        $scope.editor.addEventListener('saved',$scope.searchContent);
     };
     $scope.searchContent=function(ev){
         if(validate($scope.editor)){
