@@ -13,7 +13,7 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.init('*[data-editable]','data-name');
         $scope.editor.addEventListener('start', function (ev) {
             $scope.this=this;
-            $scope.this.autoSaveTimer = setInterval($scope.searchContent, 30 * 1000);
+            $scope.this.autoSaveTimer = setInterval($scope.searchContent, 5 * 1000);
         });
         $scope.editor.addEventListener('stop', function (ev) {
             clearInterval($scope.this.autoSaveTimer);
