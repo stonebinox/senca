@@ -29,9 +29,9 @@ app.controller("editor",function($scope,$compile,$http){
             if(validate(content)){
                 var sp=content.split('</');
                 content=sp[sp.length-2];
-                console.log(content);
                 sp=content.split(">");
                 content=sp[1];
+                console.log(content);
                 sp=content.split(" ");
                 if(sp.length>=50){                    
                     $.ajax({
