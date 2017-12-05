@@ -166,7 +166,6 @@ class urlMaster
         {
             if(is_array($tag))
             {
-                var_dump($tag);
                 $this->findHeadings($tag);
             }
             else
