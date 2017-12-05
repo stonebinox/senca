@@ -106,6 +106,7 @@ app.controller("editor",function($scope,$compile,$http){
             }
         }
         var contentData=content[i];
+        console.log(contentData);
         var contentValue=stripslashes(contentData.content_value);
         $("#parser").html(contentValue);
         var parsed=$("#parser").text();
