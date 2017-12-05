@@ -76,7 +76,7 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.displayContent=function(){
         if(validate($scope.contentArray)){
             var content=$scope.contentArray;
-            $("#suggestions").html('<small>'+content.length+' results found</small>');
+            $("#suggestions").html('<small>'+content.length+' results found</small><br>');
             var text='';
             for(var i=0;i<content.length;i++){
                 var contentRow=content[i];
