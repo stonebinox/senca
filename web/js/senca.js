@@ -101,8 +101,7 @@ app.controller("editor",function($scope,$compile,$http){
         var content=$scope.contentArray.slice();
         var pos=null;
         for(var i=0;i<content.length;i++){
-            var cont=content[i];
-            console.log(cont);
+            var cont=content[i];            
             if(cont.idcontent_master==contentID){
                 pos=i;
                 break;
@@ -110,7 +109,7 @@ app.controller("editor",function($scope,$compile,$http){
         }        
         if(pos!=null){
             var contentData=content[pos];            
-            var contentValue=stripslashes(contentData.content_value);
+            var contentValue=nl2br(stripslashes(contentData.content_value));
             $("#parser").html(contentValue);
             var parsed=$("#parser").text();
             $("#parser").html('');
