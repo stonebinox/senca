@@ -57,13 +57,13 @@ class contentTypeMaster extends urlMapMaster
             return "NO_CONTENT_TYPE_FOUND";
         }
     }
-    function getContenType() //to get a content type ID by its name
+    function getContentType() //to get a content type ID by its name
     {
-        if($this->contentValid)
+        if($this->contentTypeValid)
         {
             $app=$this->app;
             $contentTypeID=$this->content_type_id;
-            $ctm="SELECT idcontent_type_master FROM content_type_master WHERE idcontent_type_master='contentTypeID'";
+            $ctm="SELECT * FROM content_type_master WHERE idcontent_type_master='$contentTypeID'";
             $ctm=$app['db']->fetchAssoc($ctm);
             if(($ctm!="")&&($ctm!=NULL))
             {
