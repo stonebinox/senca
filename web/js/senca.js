@@ -98,11 +98,11 @@ app.controller("editor",function($scope,$compile,$http){
         }
     };
     $scope.showFullContent=function(contentID){
-        console.log($scope.contentArray);
         var content=$scope.contentArray.slice();
         var pos=null;
         for(var i=0;i<content.length;i++){
             var cont=content[i];
+            console.log(cont);
             if(cont.idcontent_master==contentID){
                 pos=i;
                 break;
