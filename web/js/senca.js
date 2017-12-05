@@ -76,7 +76,7 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.displayContent=function(){
         if(validate($scope.contentArray)){
             var content=$scope.contentArray;
-            $("#suggestions").html('<h4>'+content.length+' results found</h4>');
+            $("#suggestions").html('<small>'+content.length+' results found</small>');
             var text='';
             for(var i=0;i<content.length;i++){
                 var contentRow=content[i];
@@ -88,7 +88,7 @@ app.controller("editor",function($scope,$compile,$http){
                 }
                 var contentType=contentRow.content_type_master_idcontent_type_master;
                 var contentTypeName=contentType.content_type;
-                text+='<div class="panel panel-default"><div class="panel-heading">'+contentTypeName+' result</div><div class="panel-body">'+parsed+'</div>';
+                text+='<div class="panel panel-default"><div class="panel-heading">'+contentTypeName+' result</div><div class="panel-body">'+parsed+'</div></div>';
             }
             $("#suggestions").append(text);
         }
