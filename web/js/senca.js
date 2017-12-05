@@ -29,8 +29,8 @@ app.controller("editor",function($scope,$compile,$http){
                     clearTimeout($scope.timeout);
                     $scope.timeout=null;
                     $.ajax({
-                        method:"post",
-                        action:"search",
+                        method:"POST",
+                        url:"search",
                         data: {
                             content: content
                         },
