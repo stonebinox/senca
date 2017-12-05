@@ -170,9 +170,8 @@ class urlMaster
             }
             else
             {
-                if(($tag['tag']!="")&&($tag['tag']!=NULL))
+                if(isset($tag['tag']))
                 {
-                    var_dump($tag);
                     $tagName=strtolower($tag['tag']);
                     switch($tagName)
                     {
