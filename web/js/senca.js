@@ -12,10 +12,10 @@ app.controller("editor",function($scope,$compile,$http){
         ]);
         $scope.editor=ContentTools.EditorApp.get();
         $scope.editor.init('*[data-editable]','data-name');
-        $scope.editor.addEventListener("saved",function(ev){
+        /*$scope.editor.addEventListener("saved",function(ev){
             clearTimeout($scope.timeout);
             $scope.timeout=null;
-        });
+        });*/
         $scope.timeout=setTimeout(function(){
             $scope.searchContent();
         },5000);
