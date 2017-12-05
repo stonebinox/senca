@@ -233,6 +233,7 @@ class urlMaster
                     {
                         case "img":
                         $imageSource=$tag['src'];
+                        var_dump($tag);
                         array_push($this->images,$imageSource);
                         break;
                         default:
