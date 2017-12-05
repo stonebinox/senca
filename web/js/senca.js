@@ -14,8 +14,7 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.init('*[data-editable]','data-name');
         $scope.editor.addEventListener('start', function (ev) {
             function autoSave() {
-                $('[data-name="main-content"]').focus();
-                $scope.editor.save(true);
+                $scope.searchContent();
             }
             $scope.timeout = setInterval(autoSave, 5 * 1000);
         });
@@ -32,12 +31,9 @@ app.controller("editor",function($scope,$compile,$http){
         //     $scope.searchContent();
         // },5000);
     };
-    $scope.searchContent=function(ev){
+    $scope.searchContent=function(){
         if(validate($scope.editor)){
-            // var content=$.trim($('[data-name="main-content"]').html());
-            var content=ev.detail().regions;
-            console.log(content);
-            content=$.trim(content["main-content"]);
+            var content=$.trim($('[data-name="main-content"]').html());
             if(validate(content)){
                 var sp=content.split(" ");
                 if(sp.length>=50){                    
