@@ -12,16 +12,28 @@ app.controller("editor",function($scope,$compile,$http){
         ]);
         $scope.editor=ContentTools.EditorApp.get();
         $scope.editor.init('*[data-editable]','data-name');
-        /*$scope.editor.addEventListener("saved",function(ev){
-            clearTimeout($scope.timeout);
-            $scope.timeout=null;
-        });*/
-        $scope.timeout=setTimeout(function(){
+        $scope.editor.addEventListener('start', function (ev) {
+            function autoSave() {
+                $scope.editor.save(true);
+            }
+            $scope.timeout = setInterval(autoSave, 5 * 1000);
+        });
+        
+        editor.addEventListener('stop', function (ev) {
+            clearInterval($scope.timeout);
+        });
+        $scope.editor.addEventListener("saved",function(ev){
+            // clearTimeout($scope.timeout);
+            // $scope.timeout=null;
             $scope.searchContent();
-        },5000);
+        });
+        // $scope.timeout=setTimeout(function(){
+        //     $scope.searchContent();
+        // },5000);
     };
     $scope.searchContent=function(){
         if(validate($scope.editor)){
+            console.log("here");
             var content=$.trim($('[data-name="main-content"]').html());
             if(validate(content)){
                 var sp=content.split(" ");
@@ -52,9 +64,9 @@ app.controller("editor",function($scope,$compile,$http){
                                     response=JSON.parse(response);
                                     console.log(response);
                                 }
-                                $scope.timeout=setTimeout(function(){
-                                    $scope.searchContent();
-                                },5000);
+                                // $scope.timeout=setTimeout(function(){
+                                //     $scope.searchContent();
+                                // },5000);
                             }  
                             else{
                                 messageBox("Problem","Something went wrong while searching for suggestions. Please try again later. This is what we see: "+response);
@@ -66,9 +78,9 @@ app.controller("editor",function($scope,$compile,$http){
                     });
                 }
                 else{
-                    $scope.timeout=setTimeout(function(){
-                        $scope.searchContent();
-                    },5000);
+                    // $scope.timeout=setTimeout(function(){
+                    //     $scope.searchContent();
+                    // },5000);
                 }
             }
         }
