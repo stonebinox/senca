@@ -50,10 +50,10 @@ app.controller("editor",function($scope,$compile,$http){
                                 else{
                                     response=JSON.parse(response);
                                     console.log(response);
-                                    $scope.timeout=setTimeout(function(){
-                                        $scope.searchContent();
-                                    },5000);
                                 }
+                                $scope.timeout=setTimeout(function(){
+                                    $scope.searchContent();
+                                },5000);
                             }  
                             else{
                                 messageBox("Problem","Something went wrong while searching for suggestions. Please try again later. This is what we see: "+response);
