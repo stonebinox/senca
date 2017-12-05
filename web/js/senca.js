@@ -88,8 +88,9 @@ app.controller("editor",function($scope,$compile,$http){
                 }
                 var contentType=contentRow.content_type_master_idcontent_type_master;
                 var contentTypeName=contentType.content_type;
-                text+='<div class="panel panel-default"><div class="panel-heading">'+contentTypeName+' result</div><div class="panel-body">'+parsed+'</div></div>';
+                text+='<div class="panel panel-default"><div class="panel-heading">'+contentTypeName+' result</div><div class="panel-body">'+parsed+'</div><div class="panel-footer"><div class="text-right"><div class="btn-group"><button type="button" class="btn btn-default btn-sm">Read full text</button><button type="button" class="btn btn-info btn-sm">Include <span class="glyphicon glyphicon-chevron-right"></span></button></div></div></div></div>';
             }
+            text+='<br><br>';
             $("#suggestions").append(text);
         }
     };
