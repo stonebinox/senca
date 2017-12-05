@@ -164,25 +164,31 @@ class urlMaster
     {
         foreach($html as $tag)
         {
-            var_dump($tag);
-            echo "<br><br><br>";
-            /*$tagName=strtolower($tag['tag']);
-            switch($tagName)
+            if(is_array($tag))
             {
-                case "h1":
-                case "h2":
-                case "h3":
-                case "h4":
-                case "h5":
-                case "h6":
-                $htmlContent=$tag["html"];
-                array_push($this->headings,$htmlContent);
-                break;
-                default:
-                $children=$tag['children'];
-                $this->findHeadings($children);
-                break;
-            }*/
+                var_dump($tag);
+                $this->findHeadings($tag);
+            }
+            else
+            {
+                $tagName=strtolower($tag['tag']);
+                switch($tagName)
+                {
+                    case "h1":
+                    case "h2":
+                    case "h3":
+                    case "h4":
+                    case "h5":
+                    case "h6":
+                    $htmlContent=$tag["html"];
+                    array_push($this->headings,$htmlContent);
+                    break;
+                    default:
+                    $children=$tag['children'];
+                    $this->findHeadings($children);
+                    break;
+                }
+            }
         }
     }
     function findParagraphs($html)
