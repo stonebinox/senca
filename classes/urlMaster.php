@@ -170,7 +170,7 @@ class urlMaster
             }
             else
             {
-                var_dump($tag);
+                print_r($tag);
                 echo '<br><br>';
                 /*$tagName=strtolower($tag['tag']);
                 switch($tagName)
