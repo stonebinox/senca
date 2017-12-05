@@ -163,6 +163,7 @@ class urlMaster
     function findHeadings($html)
     {
         var_dump($html);
+        echo "<br><br>";
         foreach($html as $tag)
         {
             $tagName=strtolower($tag['tag']);
