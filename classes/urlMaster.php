@@ -179,7 +179,7 @@ class urlMaster
                     array_push($this->headings,$htmlContent);
                     break;
                     default:
-                    var_dump($tag['children']);
+                    $this->findHeadings($tag['children']);
                     break;
                 }
             }
@@ -201,6 +201,9 @@ class urlMaster
                     case "p":
                     $htmlContent=$tag['html'];
                     array_push($this->paragraphs,$htmlContent);
+                    break;
+                    default:
+                    $this->findParagraphs($tag['children']);
                     break;
                 }
             }
