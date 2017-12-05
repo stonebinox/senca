@@ -22,18 +22,11 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.addEventListener('stop', function (ev) {
             clearInterval($scope.timeout);
         });
-        $scope.editor.addEventListener("saved",function(ev){
-            // clearTimeout($scope.timeout);
-            // $scope.timeout=null;
-            $scope.searchContent(ev);
-        });
-        // $scope.timeout=setTimeout(function(){
-        //     $scope.searchContent();
-        // },5000);
     };
     $scope.searchContent=function(){
         if(validate($scope.editor)){
             var content=$.trim($('[data-name="main-content"]').html());
+            console.log(content);
             if(validate(content)){
                 var sp=content.split(" ");
                 if(sp.length>=50){                    
