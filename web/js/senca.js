@@ -27,7 +27,6 @@ app.controller("editor",function($scope,$compile,$http){
         if(validate($scope.editor)){
             var content=$.trim($('[data-name="main-content"]').html());
             if(validate(content)){
-                console.log(content);
                 var sp=content.split('>');
                 content=sp[sp.length-2];
                 sp=content.split("</");
