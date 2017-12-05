@@ -78,7 +78,7 @@ $app->get("/url/delete/{urlID}",function($urlID) use ($app){
     $response=$url->deleteURL();
     return $response;
 });
-$app->post("/search",function(Request $request) use($app){
+$app->get("/search",function(Request $request) use($app){
     if($request->get("content"))
     {
         require("../classes/urlMaster.php");
