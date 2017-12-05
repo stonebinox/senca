@@ -219,13 +219,12 @@ class urlMaster
                     $dom = new DOMDocument();
                     @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
-                    print_r($json['children']);
-                    $this->findHeadings($json);
+                    $this->findHeadings($json['children']);
                     foreach($this->headings as $heading)
                     {
                         $response=$content->addContent($heading,11,$urlID);
                     }
-                    $this->findParagraphs($json);
+                    $this->findParagraphs($json['children']);
                     foreach($this->paragraphs as $paragraph)
                     {
                         $response=$content->addContent($paragraph,1,$urlID);
