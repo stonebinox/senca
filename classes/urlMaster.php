@@ -176,7 +176,7 @@ class urlMaster
                     $dom = new DOMDocument();
                     @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
-                    var_dump($json);
+                    print_r($json);
                     $response=$content->addContent($output,31,$urlID);
                     if($response=="CONTENT_ADDED")
                     {
