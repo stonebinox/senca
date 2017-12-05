@@ -54,8 +54,8 @@ app.controller("editor",function($scope,$compile,$http){
                                 }
                                 else{
                                     response=JSON.parse(response);
+                                    console.log(response);
                                     var contentValue=response.content_value;
-                                    console.log(contentValue);
                                     $("#parser").html(contentValue);
                                     //console.log(parsed);
                                 }
