@@ -80,7 +80,6 @@ class contentMaster extends contentTypeMaster
                 $urlID=$cm['url_master_idurl_master'];
                 urlMaster::__construct($urlID);
                 $url=urlMaster::getURL();
-                var_dump($url);
                 if(is_array($url))
                 {
                     $cm['url_master_idurl_master']=$url;
