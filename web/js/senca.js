@@ -26,9 +26,13 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.searchContent=function(){
         if(validate($scope.editor)){
             var content=$.trim($('[data-name="main-content"]').html());
-            console.log(content);
             if(validate(content)){
-                var sp=content.split(" ");
+                var sp=content.split('</');
+                content=sp[sp.length-1];
+                sp=content.split(">");
+                content=sp[1];
+                console.log(content);
+                sp=content.split(" ");
                 if(sp.length>=50){                    
                     $.ajax({
                         method:"POST",
