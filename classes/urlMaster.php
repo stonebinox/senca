@@ -187,7 +187,6 @@ class urlMaster
             else
             {
                 var_dump($tag);
-                //damn
                 //$this->findHeadings($tag);
             }
         }
@@ -233,7 +232,7 @@ class urlMaster
                     {
                         $response=$content->addContent($heading,11,$urlID);
                     }
-                    $this->findParagraphs($json['children']);
+                    //$this->findParagraphs($json['children']);
                     foreach($this->paragraphs as $paragraph)
                     {
                         $response=$content->addContent($paragraph,1,$urlID);
