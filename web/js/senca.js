@@ -14,6 +14,7 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.init('*[data-editable]','data-name');
         $scope.editor.addEventListener('start', function (ev) {
             function autoSave() {
+                $('[data-name="main-content"]').focus();
                 $scope.editor.save(true);
             }
             $scope.timeout = setInterval(autoSave, 5 * 1000);
