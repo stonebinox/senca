@@ -186,7 +186,8 @@ class urlMaster
             }
             else
             {
-                $this->findHeadings($tag);
+                var_dump($tag);
+                //$this->findHeadings($tag);
             }
         }
     }
