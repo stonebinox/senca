@@ -74,13 +74,21 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.displayContent=function(){
         if(validate($scope.contentArray)){
             var content=$scope.contentArray;
+            $("#suggestions").html('<h4>'+content.length+' results found</h4>');
+            var text='';
             for(var i=0;i<content.length;i++){
                 var contentRow=content[i];
                 var contentValue=contentRow.content_value;
                 $("#parser").html(contentValue);
                 var parsed=$("#parser").text();
-                console.log(parsed);
+                if(parsed.length>100){
+                    parsed=parsed.substring(0,100)+' ...';
+                }
+                var contentType=contentRow.content_type_master_idcontent_type_master;
+                var contentTypeName=contentType.content_type;
+                text+='<div class="panel panel-default"><div class="panel-heading">'+contentTypeName+' result</div><div class="panel-body">'+parsed+'</div>';
             }
+            $("#suggestions").append(text);
         }
     };
 });
