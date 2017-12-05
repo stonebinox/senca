@@ -89,7 +89,7 @@ $app->get("/search",function(Request $request) use($app){
         $response=$content->searchContent($request->get("content"));
         if(is_array($response))
         {
-            return json_encode($response);
+            return json_encode($response)."here";
         }
         return $response;
     }
