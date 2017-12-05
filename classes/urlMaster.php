@@ -187,13 +187,13 @@ class urlMaster
                         break;
                         default:
                         $children=$tag['children'];
-                        @$this->findHeadings($children);
+                        $this->findHeadings($children);
                         break;
                     }
                 }
                 else
                 {
-                    @$this->findHeadings($tag);
+                    $this->findHeadings($tag);
                 }
             }
         }
@@ -234,7 +234,7 @@ class urlMaster
                     $dom = new DOMDocument();
                     @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
-                    @$this->findHeadings($json['children']);
+                    $this->findHeadings($json['children']);
                     foreach($this->headings as $heading)
                     {
                         $response=$content->addContent($heading,11,$urlID);
