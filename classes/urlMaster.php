@@ -178,6 +178,9 @@ class urlMaster
                     $htmlContent=$tag["html"];
                     array_push($this->headings,$htmlContent);
                     break;
+                    default:
+                    var_dump($tag['children']);
+                    break;
                 }
             }
             else
