@@ -19,7 +19,7 @@ app.controller("editor",function($scope,$compile,$http){
             $scope.timeout = setInterval(autoSave, 5 * 1000);
         });
         
-        editor.addEventListener('stop', function (ev) {
+        $scope.editor.addEventListener('stop', function (ev) {
             clearInterval($scope.timeout);
         });
         $scope.editor.addEventListener("saved",function(ev){
