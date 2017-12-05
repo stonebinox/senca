@@ -159,6 +159,7 @@ class contentMaster extends contentTypeMaster
                 }
             }
             $cm.=" ORDER BY idcontent_master DESC LIMIT 10";
+            echo $cm;
             $cm=$app['db']->fetchAll($cm);
             $contentArray=array();
             for($i=0;$i<count($cm);$i++)
