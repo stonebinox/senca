@@ -84,6 +84,8 @@ class contentMaster extends contentTypeMaster
                 {
                     $cm['url_master_idurl_master']=$url;
                 }
+                $content=htmlentities($cm['content_value']);
+                $cm['content_value']=$content;
                 return $cm;
             }
             else
