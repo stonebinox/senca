@@ -35,8 +35,8 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.searchContent=function(ev){
         if(validate($scope.editor)){
             // var content=$.trim($('[data-name="main-content"]').html());
-            var content=$.trim(ev.detail().regions.mainContent);
-            console.log(content);
+            var content=ev.detail().regions;
+            console.log(content,content.mainContent);
             if(validate(content)){
                 var sp=content.split(" ");
                 if(sp.length>=50){                    
