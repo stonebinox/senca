@@ -11,6 +11,8 @@ class urlMaster
     public $app=NULL;
     private $url_id=NULL;
     public $urlValid=false;
+    public $headings=[];
+    public $paragraphs=[];
     function __construct($urlID=NULL)
     {
         $this->app=$GLOBALS['app'];
@@ -158,6 +160,47 @@ class urlMaster
         }
         return $obj;
     }
+    function findHeadings($html)
+    {
+        foreach($html as $tag)
+        {
+            $tagName=strtolower($tag['tag']);
+            switch($tagName)
+            {
+                case "h1":
+                case "h2":
+                case "h3":
+                case "h4":
+                case "h5":
+                case "h6":
+                $htmlContent=$tag["html"];
+                array_push($this->headings,$htmlContent);
+                break;
+                default:
+                $children=$tag['children'];
+                $this->findHeadings($children);
+                break;
+            }
+        }
+    }
+    function findParagraphs($html)
+    {
+        foreach($html as $tag)
+        {
+            $tagName=strtolower($tag['tag']);
+            switch($tagName)
+            {
+                case "p":
+                $htmlContent=$tag['html'];
+                array_push($this->paragraphs,$htmlContent);
+                break;
+                default:
+                $children=$tag['children'];
+                $this->findParagraphs($children);
+                break;
+            }
+        }
+    }
     function processURL() //to process a url and extract all content
     {
         $app=$this->app;
@@ -176,14 +219,20 @@ class urlMaster
                     $dom = new DOMDocument();
                     @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
-                    print_r($json);
-                    $response=$content->addContent($output,31,$urlID);
-                    if($response=="CONTENT_ADDED")
+                    $this->findHeadings($json);
+                    foreach($this->headings as $heading)
                     {
-                        $up="UPDATE url_master SET stat='1' WHERE idurl_master='$urlID'";
-                        $up=$app['db']->executeUpdate($up);
+                        $response=$content->addContent($heading,11,$urlID);
                     }
-                    return $response;
+                    $this->findParagraphs($json);
+                    foreach($this->paragraphs as $paragraph)
+                    {
+                        $response=$content->addContent($paragraph,1,$urlID);
+                    }
+                    // $response=$content->addContent($output,31,$urlID);
+                    $up="UPDATE url_master SET stat='1' WHERE idurl_master='$urlID'";
+                    $up=$app['db']->executeUpdate($up);
+                    return "CONTENT_ADDED";
                 }
                 else
                 {
