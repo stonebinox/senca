@@ -64,7 +64,9 @@ app.controller("editor",function($scope,$compile,$http){
                             }
                         },
                         beforeSend:function(){
-                            $("#suggestions").html("Searching ...");
+                            if($("#suggestions").html().indexOf("Suggestions show up here")!=-1){
+                                $("#suggestions").html("Searching ...");
+                            }
                         }
                     });
                 }
