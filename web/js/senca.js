@@ -198,7 +198,7 @@ appURL.controller("url",function($scope,$compile,$http){
         }
     };
     $scope.scrapeURL=function(urlID){
-        $http.get("url/extract/"+urlID)
+        $http.get("extract/"+urlID)
         .then(function success(response){
             response=$.trim(response.data);
             switch(response){
