@@ -107,8 +107,7 @@ app.controller("editor",function($scope,$compile,$http){
                 pos=i;
                 break;
             }
-        }
-        console.log(pos);
+        }        
         if(pos!=null){
             var contentData=content[pos];            
             var contentValue=stripslashes(contentData.content_value);
