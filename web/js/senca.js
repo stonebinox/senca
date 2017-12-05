@@ -75,7 +75,7 @@ app.controller("editor",function($scope,$compile,$http){
     };
     $scope.displayContent=function(){
         if(validate($scope.contentArray)){
-            var content=$scope.contentArray            
+            var content=$scope.contentArray;
             $("#suggestions").html('<small>Results found: </small><hr>');
             var text='';
             for(var i=0;i<content.length;i++){
@@ -98,7 +98,8 @@ app.controller("editor",function($scope,$compile,$http){
         }
     };
     $scope.showFullContent=function(contentID){
-        var content=$scope.contentArray;
+        console.log($scope.contentArray);
+        var content=$scope.contentArray.slice();
         var pos=null;
         for(var i=0;i<content.length;i++){
             var cont=content[i];
