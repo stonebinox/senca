@@ -165,7 +165,8 @@ class urlMaster
         foreach($html as $tag)
         {
             var_dump($tag);
-            $tagName=strtolower($tag['tag']);
+            echo "<br><br><br>";
+            /*$tagName=strtolower($tag['tag']);
             switch($tagName)
             {
                 case "h1":
@@ -181,7 +182,7 @@ class urlMaster
                 $children=$tag['children'];
                 $this->findHeadings($children);
                 break;
-            }
+            }*/
         }
     }
     function findParagraphs($html)
