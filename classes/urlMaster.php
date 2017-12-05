@@ -190,17 +190,20 @@ class urlMaster
     {
         foreach($html as $tag)
         {
-            $tagName=strtolower($tag['tag']);
-            switch($tagName)
+            if(isset($tag['tag']))
             {
-                case "p":
-                $htmlContent=$tag['html'];
-                array_push($this->paragraphs,$htmlContent);
-                break;
-                default:
-                $children=$tag['children'];
-                $this->findParagraphs($children);
-                break;
+                $tagName=strtolower($tag['tag']);
+                switch($tagName)
+                {
+                    case "p":
+                    $htmlContent=$tag['html'];
+                    array_push($this->paragraphs,$htmlContent);
+                    break;
+                }
+            }
+            else
+            {
+                $this->findParagraphs($tag);
             }
         }
     }
@@ -227,7 +230,7 @@ class urlMaster
                     {
                         $response=$content->addContent($heading,11,$urlID);
                     }
-                    //$this->findParagraphs($json['children']);
+                    $this->findParagraphs($json['children']);
                     foreach($this->paragraphs as $paragraph)
                     {
                         $response=$content->addContent($paragraph,1,$urlID);
