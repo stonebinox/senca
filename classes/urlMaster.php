@@ -13,6 +13,7 @@ class urlMaster
     public $urlValid=false;
     public $headings=[];
     public $paragraphs=[];
+    public $images=[];
     function __construct($urlID=NULL)
     {
         $this->app=$GLOBALS['app'];
@@ -219,6 +220,33 @@ class urlMaster
             }
         }
     }
+    function findImages($html)
+    {
+        if(is_array($html))
+        {
+            foreach($html as $tag)
+            {
+                if(isset($tag['tag']))
+                {
+                    $tagName=strtolower($tag['tag']);
+                    switch($tagName)
+                    {
+                        case "img":
+                        $imageSource=$tag['src'];
+                        array_push($this->images,$imageSource);
+                        break;
+                        default:
+                        $this->findImages($tag['children']);
+                        break;
+                    }
+                }
+                else
+                {
+                    $this->findImages($tag);
+                }
+            }
+        }
+    }
     function processURL() //to process a url and extract all content
     {
         $app=$this->app;
@@ -247,7 +275,11 @@ class urlMaster
                     {
                         $response=$content->addContent($paragraph,1,$urlID);
                     }
-                    // $response=$content->addContent($output,31,$urlID);
+                    $this->findImages($json['children']);
+                    foreach($this->images as $image)
+                    {
+                        $response=$content->addContent($image,21,$urlID);
+                    }
                     $up="UPDATE url_master SET stat='1' WHERE idurl_master='$urlID'";
                     $up=$app['db']->executeUpdate($up);
                     return "CONTENT_ADDED";
