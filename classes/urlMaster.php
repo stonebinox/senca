@@ -170,7 +170,9 @@ class urlMaster
             }
             else
             {
-                $tagName=strtolower($tag['tag']);
+                var_dump($tag);
+                echo '<br><br>';
+                /*$tagName=strtolower($tag['tag']);
                 switch($tagName)
                 {
                     case "h1":
@@ -186,7 +188,7 @@ class urlMaster
                     $children=$tag['children'];
                     $this->findHeadings($children);
                     break;
-                }
+                }*/
             }
         }
     }
