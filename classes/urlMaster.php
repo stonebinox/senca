@@ -187,13 +187,13 @@ class urlMaster
                         break;
                         default:
                         $children=$tag['children'];
-                        $this->findHeadings($children);
+                        @$this->findHeadings($children);
                         break;
                     }
                 }
                 else
                 {
-                    $this->findHeadings($tag);
+                    @$this->findHeadings($tag);
                 }
             }
         }
