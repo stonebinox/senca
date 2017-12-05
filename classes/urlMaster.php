@@ -219,7 +219,7 @@ class urlMaster
                     $dom = new DOMDocument();
                     @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
-                    print_r($json);
+                    print_r($json['children']);
                     $this->findHeadings($json);
                     foreach($this->headings as $heading)
                     {
