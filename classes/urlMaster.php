@@ -171,6 +171,7 @@ class urlMaster
             else
             {
                 print_r($tag);
+                echo $tag[0];
                 echo '<br><br>';
                 /*$tagName=strtolower($tag['tag']);
                 switch($tagName)
