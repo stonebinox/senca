@@ -177,7 +177,6 @@ class urlMaster
                 array_push($this->headings,$htmlContent);
                 break;
                 default:
-                var_dump($tag);
                 $children=$tag['children'];
                 $this->findHeadings($children);
                 break;
@@ -220,6 +219,7 @@ class urlMaster
                     $dom = new DOMDocument();
                     @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
+                    print_r($json);
                     $this->findHeadings($json);
                     foreach($this->headings as $heading)
                     {
