@@ -16,7 +16,7 @@ app.controller("editor",function($scope,$compile,$http){
             function autoSave() {
                 $scope.searchContent();
             }
-            $scope.timeout = setInterval(autoSave, 5 * 1000);
+            $scope.timeout = setInterval(autoSave, 10 * 1000);
         });
         
         $scope.editor.addEventListener('stop', function (ev) {
@@ -31,7 +31,6 @@ app.controller("editor",function($scope,$compile,$http){
                 content=sp[sp.length-2];
                 sp=content.split("</");
                 content=sp[0];
-                console.log(content);
                 sp=content.split(" ");
                 if(sp.length>=50){                    
                     $.ajax({
@@ -56,7 +55,9 @@ app.controller("editor",function($scope,$compile,$http){
                                 }
                                 else{
                                     response=JSON.parse(response);
-                                    console.log(response);
+                                    var contentValue=response.content_value;
+                                    var parsed=$("#parser").html(contentValue).text();
+                                    console.log(parsed);
                                 }
                                 // $scope.timeout=setTimeout(function(){
                                 //     $scope.searchContent();
