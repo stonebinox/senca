@@ -99,19 +99,24 @@ app.controller("editor",function($scope,$compile,$http){
     };
     $scope.showFullContent=function(contentID){
         var content=$scope.contentArray;
+        var pos=null;
         for(var i=0;i<content.length;i++){
             var cont=content[i];
             if(cont.idcontent_master==contentID){
+                pos=i;
                 break;
             }
         }
-        var contentData=content[i];
-        console.log(contentData);
-        var contentValue=stripslashes(contentData.content_value);
-        $("#parser").html(contentValue);
-        var parsed=$("#parser").text();
-        $("#parser").html('');
-        messageBox("Full Content",contentValue);
+        console.log(pos);
+        if(pos!=null){
+            var contentData=content[pos];
+            console.log(contentData);
+            var contentValue=stripslashes(contentData.content_value);
+            $("#parser").html(contentValue);
+            var parsed=$("#parser").text();
+            $("#parser").html('');
+            messageBox("Full Content",contentValue);
+        }
     };
 });
 var appURL=angular.module("sencaurl",[]);
