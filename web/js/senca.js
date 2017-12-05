@@ -26,21 +26,20 @@ app.controller("editor",function($scope,$compile,$http){
         $scope.editor.addEventListener("saved",function(ev){
             // clearTimeout($scope.timeout);
             // $scope.timeout=null;
-            $scope.searchContent();
+            $scope.searchContent(ev);
         });
         // $scope.timeout=setTimeout(function(){
         //     $scope.searchContent();
         // },5000);
     };
-    $scope.searchContent=function(){
+    $scope.searchContent=function(ev){
         if(validate($scope.editor)){
-            console.log("here");
-            var content=$.trim($('[data-name="main-content"]').html());
+            // var content=$.trim($('[data-name="main-content"]').html());
+            var content=ev.detail().regions;
+            console.log(content);
             if(validate(content)){
                 var sp=content.split(" ");
-                if(sp.length>=50){
-                    clearTimeout($scope.timeout);
-                    $scope.timeout=null;
+                if(sp.length>=50){                    
                     $.ajax({
                         method:"POST",
                         url:"search",
