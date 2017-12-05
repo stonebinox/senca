@@ -28,10 +28,10 @@ app.controller("editor",function($scope,$compile,$http){
             var content=$.trim($('[data-name="main-content"]').html());
             if(validate(content)){
                 var sp=content.split('</');
+                console.log(sp);
                 content=sp[sp.length-1];
                 sp=content.split(">");
                 content=sp[1];
-                console.log(content);
                 sp=content.split(" ");
                 if(sp.length>=50){                    
                     $.ajax({
