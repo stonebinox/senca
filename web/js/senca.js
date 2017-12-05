@@ -40,6 +40,7 @@ app.controller("editor",function($scope,$compile,$http){
                         },
                         success: function(response){
                             $("#suggestions").html("");
+                            console.log(response);
                             if((validate(response))&&(response!="INVALID_PARAMETERS")){
                                 if(response=="NO_CONTENT_FOUND"){
                                     $("#suggestions").html("<small>No matches found.</small>");
