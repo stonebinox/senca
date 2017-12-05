@@ -221,8 +221,7 @@ class urlMaster
         }
     }
     function findImages($html)
-    {
-        var_dump($html);
+    {        
         if(is_array($html))
         {
             foreach($html as $tag)
