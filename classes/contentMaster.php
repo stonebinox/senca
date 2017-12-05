@@ -145,7 +145,7 @@ class contentMaster extends contentTypeMaster
         if(($content!="")&&($content!=NULL))
         {
             $e=explode(" ",$content);
-            $cm="SELECT idcontent_master FROM content_master WHERE stat='1' AND ";
+            $cm="SELECT idcontent_master FROM content_master WHERE stat='1' AND (";
             for($i=0;$i<count($e);$i++)
             {
                 $word=trim($e[$i]);
@@ -154,11 +154,11 @@ class contentMaster extends contentTypeMaster
                     $cm.="content_value LIKE '%$word%'";
                     if($i<count($e)-1)
                     {
-                        $cm.=" AND ";
+                        $cm.=" OR ";
                     }
                 }
             }
-            $cm.=" ORDER BY idcontent_master DESC LIMIT 10";
+            $cm.=") ORDER BY idcontent_master DESC LIMIT 10";
             echo $cm;
             $cm=$app['db']->fetchAll($cm);
             $contentArray=array();
