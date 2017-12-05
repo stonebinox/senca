@@ -36,7 +36,7 @@ app.controller("editor",function($scope,$compile,$http){
                         },
                         error: function(error){
                             console.log(error);
-                            messageBox("Problem","Something wentg wrong while searching for suggestions. Please try again later.");
+                            messageBox("Problem","Something went wrong while searching for suggestions. Please try again later.");
                         },
                         success: function(response){
                             $("#suggestions").html("");

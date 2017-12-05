@@ -148,11 +148,14 @@ class contentMaster extends contentTypeMaster
             $cm="SELECT idcontent_master FROM content_master WHERE stat='1' AND ";
             for($i=0;$i<count($e);$i++)
             {
-                $word=$e[$i];
-                $cm.="content_value LIKE '%$word%'";
-                if(($i!=0)&&($i<count($e)-1))
+                $word=trim($e[$i]);
+                if(($word!="")&&($word!=NULL))
                 {
-                    $cm.=" AND ";
+                    $cm.="content_value LIKE '%$word%'";
+                    if(($i!=0)&&($i<count($e)-1))
+                    {
+                        $cm.=" AND ";
+                    }
                 }
             }
             $cm.=" ORDER BY idcontent_master DESC LIMIT 10";
