@@ -6,6 +6,7 @@ app.controller("editor",function($scope,$compile,$http){
     $scope.editor=null;
     $scope.content=null;
     $scope.timeout=null;
+    $scope.contentArray=[];
     $scope.loadEditor=function(){
         ContentTools.StylePalette.add([
             new ContentTools.Style("Author","author",["p"])
@@ -54,14 +55,9 @@ app.controller("editor",function($scope,$compile,$http){
                                 }
                                 else{
                                     response=JSON.parse(response);
-                                    console.log(response);
-                                    var contentValue=response.content_value;
-                                    $("#parser").html(contentValue);
-                                    //console.log(parsed);
+                                    $scope.contentArray=response.slice();
+                                    $scope.displayContent();
                                 }
-                                // $scope.timeout=setTimeout(function(){
-                                //     $scope.searchContent();
-                                // },5000);
                             }  
                             else{
                                 messageBox("Problem","Something went wrong while searching for suggestions. Please try again later. This is what we see: "+response);
@@ -72,11 +68,18 @@ app.controller("editor",function($scope,$compile,$http){
                         }
                     });
                 }
-                else{
-                    // $scope.timeout=setTimeout(function(){
-                    //     $scope.searchContent();
-                    // },5000);
-                }
+            }
+        }
+    };
+    $scope.displayContent=function(){
+        if(validate($scope.contentArray)){
+            var content=$scope.contentArray;
+            for(var i=0;i<content.length;i++){
+                var contentRow=content[i];
+                var contentValue=contentRow.content_value;
+                $("#parser").html(contentValue);
+                var parsed=$("#parser").text();
+                console.log(parsed);
             }
         }
     };
