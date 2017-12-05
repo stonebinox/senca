@@ -165,7 +165,7 @@ class urlMaster
         foreach($html as $tag)
         {
             var_dump($tag);
-            echo "<br>";
+            echo "<br><br>";
             // $tagName=strtolower($tag['tag']);
             // switch($tagName)
             // {
