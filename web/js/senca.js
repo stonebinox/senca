@@ -75,14 +75,15 @@ app.controller("editor",function($scope,$compile,$http){
     };
     $scope.displayContent=function(){
         if(validate($scope.contentArray)){
-            var content=$scope.contentArray;
-            $("#suggestions").html('<small>'+content.length+' results found</small><hr>');
+            var content=$scope.contentArray            
+            $("#suggestions").html('<small>Results found: </small><hr>');
             var text='';
             for(var i=0;i<content.length;i++){
                 var contentRow=content[i];
                 var contentValue=contentRow.content_value;
                 $("#parser").html(contentValue);
                 var parsed=$("#parser").text();
+                $("#parser").html('');
                 if(parsed.length>100){
                     parsed=parsed.substring(0,100)+' ...';
                 }
