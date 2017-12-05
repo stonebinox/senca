@@ -35,7 +35,7 @@ app.controller("editor",function($scope,$compile,$http){
                 sp=content.split(" ");
                 if(sp.length>=50){                    
                     $.ajax({
-                        method:"GET",
+                        method:"POST",
                         url:"search",
                         data: {
                             content: content
