@@ -152,7 +152,7 @@ class contentMaster extends contentTypeMaster
                 if(($word!="")&&($word!=NULL))
                 {
                     $cm.="content_value LIKE '%$word%'";
-                    if(($i!=0)&&($i<count($e)-1))
+                    if(($i>0)&&($i<count($e)-1))
                     {
                         $cm.=" AND ";
                     }
