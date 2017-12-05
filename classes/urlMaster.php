@@ -162,54 +162,60 @@ class urlMaster
     }
     function findHeadings($html)
     {
-        foreach($html as $tag)
+        if(is_array($html))
         {
-            if(isset($tag['tag']))
+            foreach($html as $tag)
             {
-                $tagName=strtolower($tag['tag']);
-                switch($tagName)
+                if(isset($tag['tag']))
                 {
-                    case "h1":
-                    case "h2":
-                    case "h3":
-                    case "h4":
-                    case "h5":
-                    case "h6":
-                    $htmlContent=$tag["html"];
-                    array_push($this->headings,$htmlContent);
-                    break;
-                    default:
-                    $this->findHeadings($tag['children']);
-                    break;
+                    $tagName=strtolower($tag['tag']);
+                    switch($tagName)
+                    {
+                        case "h1":
+                        case "h2":
+                        case "h3":
+                        case "h4":
+                        case "h5":
+                        case "h6":
+                        $htmlContent=$tag["html"];
+                        array_push($this->headings,$htmlContent);
+                        break;
+                        default:
+                        $this->findHeadings($tag['children']);
+                        break;
+                    }
                 }
-            }
-            else
-            {
-                $this->findHeadings($tag);
+                else
+                {
+                    $this->findHeadings($tag);
+                }
             }
         }
     }
     function findParagraphs($html)
     {
-        foreach($html as $tag)
+        if(is_array($html))
         {
-            if(isset($tag['tag']))
+            foreach($html as $tag)
             {
-                $tagName=strtolower($tag['tag']);
-                switch($tagName)
+                if(isset($tag['tag']))
                 {
-                    case "p":
-                    $htmlContent=$tag['html'];
-                    array_push($this->paragraphs,$htmlContent);
-                    break;
-                    default:
-                    $this->findParagraphs($tag['children']);
-                    break;
+                    $tagName=strtolower($tag['tag']);
+                    switch($tagName)
+                    {
+                        case "p":
+                        $htmlContent=$tag['html'];
+                        array_push($this->paragraphs,$htmlContent);
+                        break;
+                        default:
+                        $this->findParagraphs($tag['children']);
+                        break;
+                    }
                 }
-            }
-            else
-            {
-                $this->findParagraphs($tag);
+                else
+                {
+                    $this->findParagraphs($tag);
+                }
             }
         }
     }
