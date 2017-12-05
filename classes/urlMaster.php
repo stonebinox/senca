@@ -174,7 +174,7 @@ class urlMaster
                 {
                     $content=new contentMaster;
                     $dom = new DOMDocument();
-                    $dom->loadHTML($output);
+                    @$dom->loadHTML($output);
                     $json=@$this->element_to_obj($dom->documentElement);
                     var_dump($json);
                     $response=$content->addContent($output,31,$urlID);
