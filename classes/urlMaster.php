@@ -173,6 +173,8 @@ class urlMaster
                 if(($output!="")&&($output!=NULL))
                 {
                     $content=new contentMaster;
+                    $json=@$this->element_to_obj($output);
+                    var_dump($json);
                     $response=$content->addContent($output,31,$urlID);
                     if($response=="CONTENT_ADDED")
                     {
