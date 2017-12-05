@@ -170,25 +170,31 @@ class urlMaster
             }
             else
             {
-                var_dump($tag);
-                echo '<br><br>';
-                /*$tagName=strtolower($tag['tag']);
-                switch($tagName)
+                if(($tag['tag']!="")&&($tag['tag']!=NULL))
                 {
-                    case "h1":
-                    case "h2":
-                    case "h3":
-                    case "h4":
-                    case "h5":
-                    case "h6":
-                    $htmlContent=$tag["html"];
-                    array_push($this->headings,$htmlContent);
-                    break;
-                    default:
-                    $children=$tag['children'];
-                    $this->findHeadings($children);
-                    break;
-                }*/
+                    var_dump($tag);
+                    $tagName=strtolower($tag['tag']);
+                    switch($tagName)
+                    {
+                        case "h1":
+                        case "h2":
+                        case "h3":
+                        case "h4":
+                        case "h5":
+                        case "h6":
+                        $htmlContent=$tag["html"];
+                        array_push($this->headings,$htmlContent);
+                        break;
+                        default:
+                        $children=$tag['children'];
+                        $this->findHeadings($children);
+                        break;
+                    }
+                }
+                else
+                {
+                    $this->findHeadings($tag);
+                }
             }
         }
     }
